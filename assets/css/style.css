@@ -1,0 +1,18 @@
+.current-weather-card{
+    background-color: var(--bs-gray-200);
+    animation-duration: 3s;
+    animation-name: slidein;
+}
+
+
+
+/*CSS Animation*/
+@keyframes slidein {
+    from {
+        margin-top: 100%;
+    }
+
+    to {
+        margin-top: 0%;
+    }
+}

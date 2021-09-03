@@ -8,7 +8,8 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
-    <title>Weather Dashboard</title>
+    <link href="./assets/css/style.css" rel="stylesheet"/>
+        <title>Weather Dashboard</title>
 </head>
 
 <body>
@@ -36,7 +37,7 @@
                                 </select>
                             </div>
                             <div class="d-grid gap-2">
-                                <button class="btn btn-primary" type="submit" id="btnSave">Search</button>
+                                <button class="btn btn-primary" type="submit" id="btnSearch">Search</button>
                                 <button class="btn btn-primary" type="submit" id="btnMyLocation">Used My
                                     Location</button>
                             </div>
@@ -44,7 +45,23 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-9"></div>
+            <div class="col-xs-12 col-md-9">
+                <div class="card current-weather-card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 id="cityName"></h2><img id="weatherIcon"/>
+                                <p id="temperature"></p>
+                                <p id="wind"></p>
+                                <p id="humidity"></p>
+                                <p id="uvIndex"></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
