@@ -3,6 +3,7 @@ let units = "imperial";
 const selectUnits = document.getElementById("selectUnits");
 const btnMyLocation = document.getElementById("btnMyLocation");
 const btnSearch = document.getElementById("btnSearch");
+const forecastContainer = document.getElementById("forecast-container");
 
 function getCityCurrentWeather(city) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${APIkey}`;
@@ -46,21 +47,18 @@ function errorLocation(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
+//Show information about the Current Forecast and City Name
 function showLocation(info) {
-  console.log(info);
   var date = moment(info.dt * 1000);
-  console.log(date);
   const cityName = document.getElementById("cityName");
   const weatherIcon = document.getElementById("weatherIcon");
-
   cityName.textContent = `${info.name} - ${date.format("MM/DD/YYYY")}`;
-
   const iconUrl = `http://openweathermap.org/img/w/${info.weather[0].icon}.png`;
   weatherIcon.setAttribute("src", iconUrl);
 }
 
+//Show aditional information about the weather and forecast
 function showWeatherInformation(info) {
-  console.log(info);
   const temperature = document.getElementById("temperature");
   const wind = document.getElementById("wind");
   const humidity = document.getElementById("humidity");
@@ -75,6 +73,41 @@ function showWeatherInformation(info) {
   }`;
   humidity.textContent = `Humidity: ${info.current.humidity}%`;
   uvIndex.innerHTML = formatUVIndex(info.current.uvi);
+
+  showDailyForecast(info.daily);
+}
+
+//Show Daily forecast (5 Days) in forecast-container
+function showDailyForecast(forecast) {
+  forecastContainer.innerHTML = "";
+  for (let i = 0; i < 5; i++) {
+    forecastContainer.innerHTML += createForecastDiv(forecast[i]);
+  }
+}
+
+function createForecastDiv(dayForecast) {
+  const date = moment(dayForecast.dt * 1000);
+  const icon = `http://openweathermap.org/img/w/${dayForecast.weather[0].icon}.png`;
+  const iconAlt = dayForecast.weather[0].description;
+  const temp = dayForecast.temp.day;
+  const tempMax = dayForecast.temp.max;
+  const tempMin = dayForecast.temp.min;
+  const wind = dayForecast.temp.day;
+  const humidity = dayForecast.humidity;
+  const uvi = formatUVIndex(dayForecast.uvi);
+
+  const forecastHtml = `
+                <div class="card forecast-card mx-1">
+                <div class="card-body">
+                <h2>${date.format("MM/DD/YYYY")}</h2>
+                <img src="${icon}" alt="${iconAlt}"/>
+                <p>Temp:${temp}</p>
+                <p>Wind:${wind}</p>
+                <p>Humidity:${humidity} %</p>
+                <p>UV Index:${uvi}</p>
+                </div>
+              `;
+  return forecastHtml;
 }
 
 function formatUVIndex(uvi) {
