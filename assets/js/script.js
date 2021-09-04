@@ -1,5 +1,4 @@
 const APIkey = "d77dd3a350b3fe5cdc671210cf41ca6b";
-
 let units = "imperial";
 const selectUnits = document.getElementById("selectUnits");
 const btnMyLocation = document.getElementById("btnMyLocation");
@@ -48,11 +47,14 @@ function errorLocation(err) {
 }
 
 function showLocation(info) {
+  console.log(info);
+  var date = moment(info.dt * 1000);
+  console.log(date);
   const cityName = document.getElementById("cityName");
-  const today = document.getElementById("today");
   const weatherIcon = document.getElementById("weatherIcon");
 
-  cityName.textContent = `${info.name} - 03/03/2021 `;
+  cityName.textContent = `${info.name} - ${date.format("MM/DD/YYYY")}`;
+
   const iconUrl = `http://openweathermap.org/img/w/${info.weather[0].icon}.png`;
   weatherIcon.setAttribute("src", iconUrl);
 }
@@ -65,10 +67,28 @@ function showWeatherInformation(info) {
   const uvIndex = document.getElementById("uvIndex");
   const unit = units == "imperial" ? "F" : "C";
 
+  formatUVIndex(info.current.uvi);
+
   temperature.textContent = `Temperature: ${info.current.temp} ${unit}`;
-  wind.textContent = `Wind: ${info.current.wind_speed} MPH`;
+  wind.textContent = `Wind: ${info.current.wind_speed} ${
+    unit === "F" ? "MPH" : "KMH"
+  }`;
   humidity.textContent = `Humidity: ${info.current.humidity}%`;
-  uvIndex.textContent = `UV Index: ${info.current.uvi} `;
+  uvIndex.innerHTML = formatUVIndex(info.current.uvi);
+}
+
+function formatUVIndex(uvi) {
+  if (uvi < 3) {
+    return `<span class="badge uvi-low">${uvi} - Low <i>No Protection Required</i></span>`;
+  } else if (uvi >= 3 && uvi <= 5) {
+    return `<span class="badge uvi-moderate">${uvi} - Moderate <i>Protection Required</i></span>`;
+  } else if (uvi >= 6 && uvi <= 7) {
+    return `<span class="badge uvi-high">${uvi} - High <i>Protection Required</i></span>`;
+  } else if (uvi >= 8 && uvi < 11) {
+    return `<span class="badge uvi-very-high">${uvi} - Very High <i>Protection Required</i></span>`;
+  } else if (uvi >= 11) {
+    return `<span class="badge uvi-extreme">${uvi} - Extreme <i>Extra Protection Required</i></span>`;
+  }
 }
 
 selectUnits.addEventListener("change", () => {

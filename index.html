@@ -1,75 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi:wght@400;500;700&family=Roboto:ital,wght@0,100;0,300;1,900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
-    <link href="./assets/css/style.css" rel="stylesheet"/>
-        <title>Weather Dashboard</title>
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link href="./assets/css/style.css" rel="stylesheet" />
+    <title>Weather Dashboard</title>
+  </head>
 
-<body>
+  <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h1>Weather Dashboard</h1>
-            </div>
+      <div class="row title my-5">
+        <div class="col-12 text-center">
+          <h1>Weather Dashboard</h1>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h2>Search for a City:</h2>
-                        <form>
-                            <div class="mb-3">
-                                <input type="text" class="form-control form-control-lg" id="inputCity"
-                                    placeholder="Please type the city name" />
-                            </div>
-                            <div class="mb-3">
-                                <select class="form-select form-select-lg" id="selectUnits"
-                                    aria-label="Default select example">
-                                    <option value="imperial">Fahrenheit (F)</option>
-                                    <option value="metric">Celsius (C)</option>
-                                </select>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary" type="submit" id="btnSearch">Search</button>
-                                <button class="btn btn-primary" type="submit" id="btnMyLocation">Used My
-                                    Location</button>
-                            </div>
-                        </form>
-                    </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
+          <div class="card search-card">
+            <div class="card-body">
+              <h2>Search for a City:</h2>
+              <form>
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    class="form-control form-control-lg"
+                    id="inputCity"
+                    placeholder="Please type the city name"
+                  />
                 </div>
-            </div>
-            <div class="col-xs-12 col-md-9">
-                <div class="card current-weather-card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <h2 id="cityName"></h2><img id="weatherIcon"/>
-                                <p id="temperature"></p>
-                                <p id="wind"></p>
-                                <p id="humidity"></p>
-                                <p id="uvIndex"></p>
-                            </div>
-                        </div>
-
-
-                    </div>
+                <div class="mb-3">
+                  <select
+                    class="form-select form-select-lg"
+                    id="selectUnits"
+                    aria-label="Default select example"
+                  >
+                    <option value="imperial">Fahrenheit (F)</option>
+                    <option value="metric">Celsius (C)</option>
+                  </select>
                 </div>
+                <div class="d-grid gap-2">
+                  <button class="btn btn-app" type="submit" id="btnSearch">
+                    Search
+                  </button>
+                  <button class="btn btn-app" type="submit" id="btnMyLocation">
+                    Used My Location
+                  </button>
+                </div>
+              </form>
             </div>
+          </div>
         </div>
+        <div class="col-xs-12 col-md-9">
+          <div class="card current-weather-card">
+            <div class="card-body">
+              <div class="row">
+                <div class="d-flex flex-row">
+                  <h2 id="cityName"></h2>
+                  <img id="weatherIcon" />
+                </div>
+                <div class="col-12">
+                  <p id="temperature"></p>
+                  <p id="wind"></p>
+                  <p id="humidity"></p>
+                  <p id="uvIndex"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
-    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="./assets/js/script.js"></script>
-</body>
-
+  </body>
 </html>
