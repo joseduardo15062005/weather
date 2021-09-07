@@ -5,6 +5,9 @@ const btnMyLocation = document.getElementById("btnMyLocation");
 const btnSearch = document.getElementById("btnSearch");
 const forecastContainer = document.getElementById("forecast-container");
 const cardBodyHistory = document.getElementById("cardBodyHistory");
+const divWeather = document.getElementById("divWeather");
+
+divWeather.style.display = "none";
 
 getSearchHistory();
 
@@ -15,7 +18,7 @@ function getCityCurrentWeather(city) {
     fetch(apiUrl)
       .then((response) => {
         if (response.ok) {
-          response.json();
+          return response.json();
         }
       })
       .then((response) => {
@@ -99,6 +102,7 @@ function showLocation(info) {
   weatherIcon.setAttribute("src", iconUrl);
   //Save City in localStorage
   saveSearchHistory(info.name);
+  divWeather.style.display = "block";
 }
 
 //Show aditional information about the weather and forecast
@@ -159,9 +163,9 @@ function createForecastDiv(dayForecast) {
 function formatUVIndex(uvi) {
   if (uvi < 3) {
     return `<span class="badge uvi-low">${uvi} - Low <i>No Protection Required</i></span>`;
-  } else if (uvi >= 3 && uvi <= 5) {
+  } else if (uvi >= 3 && uvi < 6) {
     return `<span class="badge uvi-moderate">${uvi} - Moderate <i>Protection Required</i></span>`;
-  } else if (uvi >= 6 && uvi <= 7) {
+  } else if (uvi >= 6 && uvi < 8) {
     return `<span class="badge uvi-high">${uvi} - High <i>Protection Required</i></span>`;
   } else if (uvi >= 8 && uvi < 11) {
     return `<span class="badge uvi-very-high">${uvi} - Very High <i>Protection Required</i></span>`;
@@ -219,3 +223,26 @@ cardBodyHistory.addEventListener("click", (event) => {
   city = event.target.getAttribute("data-city");
   getCityCurrentWeather(city);
 });
+
+//Using google autocomplete API
+let autocomplete;
+
+function initAutocomplete() {
+  autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById("inputCity"),
+    {
+      types: ["(cities)"],
+      componentRestrictions: {
+        country: "us",
+      },
+    }
+  );
+  autocomplete.addListener("place_changed", onCityChanged);
+}
+//Get City Weather Information 
+function onCityChanged() {
+  var place = autocomplete.getPlace();
+  const lat = place.geometry.location.lat();
+  const lng = place.geometry.location.lng();
+  getLocationCurrentWeather(lat, lng);
+}
