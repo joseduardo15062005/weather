@@ -28,7 +28,7 @@ body{
     animation-name: slidein;
 }
 
-.search-card {
+.search-card,.search-history-card {
     background-color: var(--secondary-color);
     border: none;
     animation-duration: 3s;

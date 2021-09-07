@@ -31,37 +31,56 @@
       </div>
       <div class="row">
         <div class="col-xs-12 col-md-3">
-          <div class="card search-card">
-            <div class="card-body">
-              <h2>Search for a City:</h2>
-              <form>
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control form-control-lg"
-                    id="inputCity"
-                    placeholder="Please type the city name"
-                  />
+          <div class="row">
+            <div class="col-12">
+              <div class="card search-card">
+                <div class="card-body">
+                  <h2>Search for a City:</h2>
+                  <form>
+                    <div class="mb-3">
+                      <input
+                        type="text"
+                        class="form-control form-control-lg"
+                        id="inputCity"
+                        placeholder="Please type the city name"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <select
+                        class="form-select form-select-lg"
+                        id="selectUnits"
+                        aria-label="Default select example"
+                      >
+                        <option value="imperial">Fahrenheit (F)</option>
+                        <option value="metric">Celsius (C)</option>
+                      </select>
+                    </div>
+                    <div class="d-grid gap-2">
+                      <button class="btn btn-app" type="submit" id="btnSearch">
+                        Search
+                      </button>
+                      <button
+                        class="btn btn-app"
+                        type="submit"
+                        id="btnMyLocation"
+                      >
+                        Used My Location
+                      </button>
+                    </div>
+                  </form>
                 </div>
-                <div class="mb-3">
-                  <select
-                    class="form-select form-select-lg"
-                    id="selectUnits"
-                    aria-label="Default select example"
-                  >
-                    <option value="imperial">Fahrenheit (F)</option>
-                    <option value="metric">Celsius (C)</option>
-                  </select>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12">
+              <div class="card search-history-card">
+                <div class="card-body">
+                    <div class="d-grid gap-2"  id="cardBodyHistory">
+
+                    </div>
                 </div>
-                <div class="d-grid gap-2">
-                  <button class="btn btn-app" type="submit" id="btnSearch">
-                    Search
-                  </button>
-                  <button class="btn btn-app" type="submit" id="btnMyLocation">
-                    Used My Location
-                  </button>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -107,6 +126,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
