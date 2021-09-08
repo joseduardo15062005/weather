@@ -195,12 +195,14 @@ function saveSearchHistory(city) {
 function getSearchHistory() {
   //Get search history from localStorage
   const history = JSON.parse(localStorage.getItem("cities"));
-  //Show history in CardBodyHistory
-  cardBodyHistory.innerHTML = "";
-  for (let city of history) {
-    cardBodyHistory.innerHTML += `<button class="btn btn-primary" data-city="${city}">
+  if (history) {
+    //Show history in CardBodyHistory
+    cardBodyHistory.innerHTML = "";
+    for (let city of history) {
+      cardBodyHistory.innerHTML += `<button class="btn btn-primary" data-city="${city}">
                                   ${city}
                                   </button>`;
+    }
   }
 }
 
@@ -239,7 +241,7 @@ function initAutocomplete() {
   );
   autocomplete.addListener("place_changed", onCityChanged);
 }
-//Get City Weather Information 
+//Get City Weather Information
 function onCityChanged() {
   var place = autocomplete.getPlace();
   const lat = place.geometry.location.lat();
