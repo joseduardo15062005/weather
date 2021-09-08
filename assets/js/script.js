@@ -98,7 +98,7 @@ function showLocation(info) {
   const cityName = document.getElementById("cityName");
   const weatherIcon = document.getElementById("weatherIcon");
   cityName.textContent = `${info.name} - ${date.format("MM/DD/YYYY")}`;
-  const iconUrl = `http://openweathermap.org/img/w/${info.weather[0].icon}.png`;
+  const iconUrl = `https://openweathermap.org/img/w/${info.weather[0].icon}.png`;
   weatherIcon.setAttribute("src", iconUrl);
   //Save City in localStorage
   saveSearchHistory(info.name);
@@ -136,7 +136,7 @@ function showDailyForecast(forecast) {
 //Create each div for each forecast
 function createForecastDiv(dayForecast) {
   const date = moment(dayForecast.dt * 1000);
-  const icon = `http://openweathermap.org/img/w/${dayForecast.weather[0].icon}.png`;
+  const icon = `https://openweathermap.org/img/w/${dayForecast.weather[0].icon}.png`;
   const iconAlt = dayForecast.weather[0].description;
   const temp = dayForecast.temp.day;
   const tempMax = dayForecast.temp.max;
