@@ -205,7 +205,6 @@ function getSearchHistory() {
     }
   }
 }
-
 selectUnits.addEventListener("change", () => {
   units = selectUnits.value;
 });
